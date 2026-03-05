@@ -34,7 +34,7 @@
       "ref": {
         "groupId": "bffbd1ac-66de-417a-ab6e-d5b6ae0b1fd4",
         "artifactId": "jukebox-api-app",
-        "version": "1.0.0-SNAPSHOT",
+        "version": "1.0.1-SNAPSHOT",
         "packaging": "jar"
       },
       "assets": [],
