@@ -42,7 +42,9 @@
       "configuration": {
         "mule.agent.application.properties.service": {
           "applicationName": "jukebox-api-app",
-          "properties": {},
+          "properties": {
+            "MY_TEST": "1"
+          },
           "secureProperties": {}
         },
         "mule.agent.logging.service": {
