@@ -43,7 +43,7 @@
         "mule.agent.application.properties.service": {
           "applicationName": "jukebox-api-app",
           "properties": {
-            "MY_TEST": "1"
+            "MY_TEST": "2"
           },
           "secureProperties": {}
         },
