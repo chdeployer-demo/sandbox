@@ -1,0 +1,23 @@
+name: Deploy API Policies
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy API policies to Sandbox environment
+    runs-on: ubuntu-latest
+    environment: Sandbox
+    container:
+      image: ghcr.io/redpill-linpro/chdeployer:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate and deploy API policies
+        run: |
+          chmod +x ./deploy-policies.sh
+          ./deploy-policies.sh
+        env:
+          ANYPOINT_CH_CONNECTEDAPP_CLIENTID: ${{ secrets.ANYPOINT_CH_CONNECTEDAPP_CLIENTID }}
+          ANYPOINT_CH_CONNECTEDAPP_CLIENTSECRET: ${{ secrets.ANYPOINT_CH_CONNECTEDAPP_CLIENTSECRET }}

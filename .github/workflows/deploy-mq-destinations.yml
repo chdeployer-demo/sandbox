@@ -1,0 +1,24 @@
+name: Deploy MQ Destinations
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy MQ destinations to Sandbox environment
+    runs-on: ubuntu-latest
+    environment: Sandbox
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy MQ destinations
+        uses: docker://ghcr.io/redpill-linpro/chdeployer:latest
+        with:
+          args: >-
+            -o "Redpill-Linpro/DevOpsDemo" 
+            -e Sandbox
+            -i "${{ secrets.ANYPOINT_CONNECTEDAPP_CLIENTID }}"
+            -s "${{ secrets.ANYPOINT_CONNECTEDAPP_CLIENTSECRET }}"
+            -m eu-central-1
+            mq-destinations/*-mq-config.json

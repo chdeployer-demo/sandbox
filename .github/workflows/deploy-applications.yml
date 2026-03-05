@@ -1,0 +1,27 @@
+name: Deploy Applications
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy applications to Sandbox environment
+    runs-on: ubuntu-latest
+    environment: Sandbox
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find deployment files
+        id: find-deployments
+        run: echo "files=$(ls deployments/*.json | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy applications
+        uses: docker://ghcr.io/redpill-linpro/chdeployer:latest
+        with:
+          args: >-
+            -o "Redpill-Linpro/DevOpsDemo" 
+            -e Sandbox
+            -i "${{ secrets.ANYPOINT_CONNECTEDAPP_CLIENTID }}"
+            -s "${{ secrets.ANYPOINT_CONNECTEDAPP_CLIENTSECRET }}"
+            ${{ steps.find-deployments.outputs.files }}

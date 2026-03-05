@@ -1,0 +1,65 @@
+{
+  "kind": "Application",
+  "version": "v1",
+  "spec": {
+    "name": "jukebox-api-app",
+    "target": {
+      "provider": "MC",
+      "targetId": "cloudhub-eu-central-1",
+      "deploymentSettings": {
+        "clustered": false,
+        "enforceDeployingReplicasAcrossNodes": false,
+	"http": {
+		"inbound": {
+			"forwardSslSession": false,
+			"lastMileSecurity": false,
+			"pathRewrite": null,
+			"publicUrl": null
+		}
+	},
+        "jvm": {},
+        "runtime": {
+          "version": "4.9.15",
+          "releaseChannel": "LTS",
+          "java": "17"
+        },
+        "updateStrategy": "rolling",
+        "disableAmLogForwarding": false,
+        "persistentObjectStore": false,
+        "generateDefaultPublicUrl": false
+      },
+      "replicas": 1
+    },
+    "application": {
+      "ref": {
+        "groupId": "bffbd1ac-66de-417a-ab6e-d5b6ae0b1fd4",
+        "artifactId": "jukebox-api-app",
+        "version": "1.0.0-SNAPSHOT",
+        "packaging": "jar"
+      },
+      "assets": [],
+      "desiredState": "STARTED",
+      "configuration": {
+        "mule.agent.application.properties.service": {
+          "applicationName": "jukebox-api-app",
+          "properties": {},
+          "secureProperties": {}
+        },
+        "mule.agent.logging.service": {
+          "scopeLoggingConfigurations": []
+        },
+        "mule.agent.scheduling.service": {
+          "schedulers": []
+        }
+      },
+      "integrations": {
+        "services": {
+          "objectStoreV2": {
+            "enabled": false
+          }
+        }
+      },
+      "vCores": 0.1
+    }
+  }
+}
