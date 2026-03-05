@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph DEV ["Development Cycle — jukebox-api-app repo"]
+        direction TB
+        A["Write Code"] --> B["GitHub Actions"]
+        B --> C["Build (mvn clean package)"]
+        C --> D["Run Unit Tests"]
+        D --> E["Publish Artifact (mvn deploy)"]
+        E -.->|iterate| A
+    end
+
+    subgraph EXCHANGE ["Anypoint Exchange"]
+        F[("Versioned Artifact Repository")]
+    end
+
+    subgraph DEPLOY ["Deployment Cycle — sandbox repo"]
+        direction TB
+        G["Update Deployment Descriptor JSON"] --> H["Trigger Workflow"]
+        H --> I["chdeployer CLI reads JSON descriptors"]
+        I --> J["Deploy to CloudHub"]
+        J -.->|iterate| G
+    end
+
+    E -->|publish artifact| F
+    F -->|pull artifact + version| I
